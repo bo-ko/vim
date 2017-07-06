@@ -2,7 +2,7 @@
 
 ![screenshot.png](screenshot.png)
 
-### 或者自己手动安装：(以ubuntu为例)
+### 安装：(以ubuntu为例)
 
 1. 安装vim `sudo apt-get install vim`
 - 安装ctags：`sudo apt-get install exuberant-ctags`
