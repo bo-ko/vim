@@ -6,12 +6,6 @@ elif which yum >/dev/null; then
 	sudo yum install -y gcc vim vim-scripts exuberant-ctags git xclip astyle python-setuptools python-devel	
 fi
 
-##Add HomeBrew support on  Mac OS
-#if which brew >/dev/null;then
-#    echo "You are using HomeBrew tool"
-#    brew install vim ctags git astyle
-#fi
-
 sudo easy_install -ZU autopep8 
 sudo ln -s /usr/bin/ctags /usr/local/bin/ctags
 mv -f ~/vim ~/vim_old
