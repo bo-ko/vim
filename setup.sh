@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "安装将花费一定时间，请耐心等待直到安装完成^_^"
-#if which apt-get >/dev/null; then
+if which apt-get >/dev/null; then
 sudo apt-get install -y vim exuberant-ctags vim-scripts  xclip astyle python-setuptools python-dev git
 elif which yum >/dev/null; then
 	sudo yum install -y gcc vim vim-scripts exuberant-ctags git xclip astyle python-setuptools python-devel	
