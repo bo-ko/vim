@@ -31,14 +31,15 @@ set rtp+=$GOROOT/misc/vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 显示相关  
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax on
+" 配色方案
+syntax enable
+set background=dark
+colorscheme solarized
+
 set cul "高亮光标所在行
 set cuc
 set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示  
 set go=             " 不要图形按钮  
-"color desert     " 设置背景主题  
-color ron     " 设置背景主题  
-"color torte     " 设置背景主题  
 "set guifont=Courier_New:h10:cANSI   " 设置字体  
 "autocmd InsertLeave * se nocul  " 用浅色高亮当前行  
 autocmd InsertEnter * se cul    " 用浅色高亮当前行  
@@ -105,62 +106,152 @@ vmap \ \cc
 "将tab替换为空格
 nmap tt :%s/\t/    /g<CR>
 
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""新文件标题
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "新建.c,.h,.sh,.java文件，自动插入文件头 
-autocmd BufNewFile *.cpp,*.[ch],*.sh,*.rb,*.java,*.py exec ":call SetTitle()" 
+autocmd BufNewFile *.cpp,*.hpp,*.[ch],*.sh,*.rb,*.java,*.py,*.html exec ":call SetTitle()" 
 ""定义函数SetTitle，自动插入文件头 
+
+func SetComment()  
+    call setline(1,"/*================================================================")   
+    call append(line("."),   "*   Copyright (C) ".strftime("%Y")." Sangfor Ltd. All rights reserved.")  
+    call append(line(".")+1, "*   ")   
+    call append(line(".")+2, "*   > File Name：".expand("%:t"))   
+    call append(line(".")+3, "*   > Author：LuZhenrong")  
+    call append(line(".")+4, "*   > Created Time：".strftime("%Y-%m-%d [%H:%M] (%A)"))   
+    call append(line(".")+5, "*   > Mail：cgxpnwqb@gmail.com")   
+    call append(line(".")+6, "*   > Describe: ")  
+    call append(line(".")+7, "================================================================*/")   
+    call append(line(".")+8, "")  
+    call append(line(".")+9, "")  
+endfunc  
+  
+func SetComment_shell()
+	call setline(1, "#!/bin/sh ") 
+    call append(line("."), "#================================================================")   
+    call append(line(".")+1, "#   Copyright (C) ".strftime("%Y")." Sangfor Ltd. All rights reserved.")  
+    call append(line(".")+2, "#   ")   
+    call append(line(".")+3, "#   > File Name：".expand("%:t"))   
+    call append(line(".")+4, "#   > Author：Bobo")  
+    call append(line(".")+5, "#   > Created Time：".strftime("%Y-%m-%d [%H:%M] (%A)"))
+    call append(line(".")+6, "#   > Mail：cgxpnwqb@gmail.com")   
+    call append(line(".")+7, "#   > Describe: ")  
+    call append(line(".")+8, "#================================================================")  
+    call append(line(".")+9, "")  
+    call append(line(".")+10, "")  
+endfunc   
+
+func SetComment_python() 
+    call setline(1, "#!/usr/bin/env python3")
+    call append(line("."), "# -*- coding: utf-8 -*-")
+    call append(line(".")+1, "#================================================================")   
+	call append(line(".")+2, "#   Copyright (C) ".strftime("%Y")." Sangfor Ltd. All rights reserved.")  
+    call append(line(".")+3, "#   ")   
+    call append(line(".")+4, "#   > File Name：".expand("%:t"))   
+    call append(line(".")+5, "#   > Author：Bobo")  
+    call append(line(".")+6, "#   > Created Time：".strftime("%Y-%m-%d [%H:%M] (%A)"))
+    call append(line(".")+7, "#   > Mail：cgxpnwqb@gmail.com")   
+    call append(line(".")+8, "#   > Describe: ")  
+    call append(line(".")+9, "#================================================================")  
+    call append(line(".")+10, "")  
+    call append(line(".")+11, "")
+endfunc
+
+func SetComment_ruby() 
+    call setline(1, "#!/usr/bin/env ruby")
+    call append(line("."), "# -*- coding: utf-8 -*-")
+    call append(line(".")+1, "#================================================================")   
+	call append(line(".")+2, "#   Copyright (C) ".strftime("%Y")." Sangfor Ltd. All rights reserved.")  
+    call append(line(".")+3, "#   ")   
+    call append(line(".")+4, "#   > File Name：".expand("%:t"))   
+    call append(line(".")+5, "#   > Author：Bobo")  
+    call append(line(".")+6, "#   > Created Time：".strftime("%Y-%m-%d [%H:%M] (%A)"))
+    call append(line(".")+7, "#   > Mail：cgxpnwqb@gmail.com")   
+    call append(line(".")+8, "#   > Describe: ")  
+    call append(line(".")+9, "#================================================================")  
+    call append(line(".")+10, "")  
+    call append(line(".")+11, "")
+endfunc
+
+func SetComment_html() 
+    call setline(1, "<!-- ================================================================")
+	call append(line("."), "   Copyright (C) ".strftime("%Y")." Sangfor Ltd. All rights reserved.")  
+    call append(line(".")+1, "   ")   
+    call append(line(".")+2, "   > File Name：".expand("%:t"))   
+    call append(line(".")+3, "   > Author：Bobo")  
+    call append(line(".")+4, "   > Created Time：".strftime("%Y-%m-%d [%H:%M] (%A)"))
+    call append(line(".")+5, "   > Mail：cgxpnwqb@gmail.com")   
+    call append(line(".")+6, "   > Describe: ")  
+    call append(line(".")+7, "================================================================ -->")  
+    call append(line(".")+8, "")  
+    call append(line(".")+9, "<!DOCTYPE html>")
+    call append(line(".")+10, "<html>")  
+    call append(line(".")+11, "<head>")    
+    call append(line(".")+12, "<meta charset=\"utf-8\">")
+    call append(line(".")+13, "<title></title>")   
+    call append(line(".")+14, "<\/head>")
+    call append(line(".")+15, "<body>") 
+    call append(line(".")+16, "    ") 
+    call append(line(".")+17, "<\/body>") 
+    call append(line(".")+18, "<\/html>")   
+endfunc
+
+
 func SetTitle() 
 	"如果文件类型为.sh文件 
 	if &filetype == 'sh' 
-		call setline(1,"\#!/bin/bash") 
-		call append(line("."), "") 
+		call SetComment_shell()
     elseif &filetype == 'python'
-        call setline(1,"#!/usr/bin/env python")
-        call append(line("."),"# coding=utf-8")
-	    call append(line(".")+1, "") 
-
+        call SetComment_python()
     elseif &filetype == 'ruby'
-        call setline(1,"#!/usr/bin/env ruby")
-        call append(line("."),"# encoding: utf-8")
-	    call append(line(".")+1, "")
-
-"    elseif &filetype == 'mkd'
-"        call setline(1,"<head><meta charset=\"UTF-8\"></head>")
+        call SetComment_ruby()
+    elseif expand("%:e") == 'html'
+        call SetComment_html() 
 	else 
-		call setline(1, "/*************************************************************************") 
-		call append(line("."), "	> File Name: ".expand("%")) 
-		call append(line(".")+1, "	> Author: ") 
-		call append(line(".")+2, "	> Mail: ") 
-		call append(line(".")+3, "	> Created Time: ".strftime("%c")) 
-		call append(line(".")+4, " ************************************************************************/") 
-		call append(line(".")+5, "")
+		call SetComment()
 	endif
 	if expand("%:e") == 'cpp'
-		call append(line(".")+6, "#include<iostream>")
-		call append(line(".")+7, "using namespace std;")
-		call append(line(".")+8, "")
+		call append(line(".")+10, "#include<iostream>")
+		call append(line(".")+11, "")
+		call append(line(".")+12, "using namespace std;")
+		call append(line(".")+13, "")
+		call append(line(".")+14, "")
 	endif
 	if &filetype == 'c'
-		call append(line(".")+6, "#include<stdio.h>")
-		call append(line(".")+7, "")
+		call append(line(".")+10, "#include<stdio.h>")
+		call append(line(".")+11, "")
+		call append(line(".")+12, "")
 	endif
 	if expand("%:e") == 'h'
-		call append(line(".")+6, "#ifndef _".toupper(expand("%:r"))."_H")
-		call append(line(".")+7, "#define _".toupper(expand("%:r"))."_H")
-		call append(line(".")+8, "#endif")
+		call append(line(".")+10, "#ifndef _".toupper(expand("%:r"))."_H_")
+		call append(line(".")+11, "#define _".toupper(expand("%:r"))."_H_")
+        call append(line(".")+12, "")
+        call append(line(".")+13, "")
+        call append(line(".")+14, "")
+		call append(line(".")+15, "#endif // _".toupper(expand("%:t:r"))."_H_") 
 	endif
-	if &filetype == 'java'
-		call append(line(".")+6,"public class ".expand("%:r"))
-		call append(line(".")+7,"")
-	endif
-	"新建文件后，自动定位到文件末尾
-endfunc 
-autocmd BufNewFile * normal G
 
+    if expand("%:e") == 'hpp' 
+		call append(line(".")+10, "#ifndef _".toupper(expand("%:r"))."_H_")
+		call append(line(".")+11, "#define _".toupper(expand("%:r"))."_H_")
+		call append(line(".")+12, "")
+        call append(line(".")+13, "")
+        call append(line(".")+14, "")
+		call append(line(".")+15, "#endif // _".toupper(expand("%:t:r"))."_H_") 
+    endif
+
+	if &filetype == 'java'
+		call append(line(".")+10,"public class ".expand("%:r"))
+		call append(line(".")+11,"")
+		call append(line(".")+12, "")
+	endif
+endfunc 
+
+autocmd BufNewFile * normal G  " 新建文件后，自动定位到文件末尾
+autocmd BufNewFile *.html :18  " 新建文件后，自动定位到文件第18行
+autocmd BufNewFile *.hpp :15
+autocmd BufNewFile *.h :15
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "键盘命令
@@ -274,9 +365,18 @@ if has("autocmd")
           \ endif
 endif
 "当打开vim且没有文件时自动打开NERDTree
-autocmd vimenter * if !argc() | NERDTree | endif
+"autocmd vimenter * if !argc() | NERDTree | endif
 " 只剩 NERDTree时自动关闭
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+let g:NERDTree_title = "[NERDTree]"  
+function! NERDTree_Start()    
+    exe 'NERDTree'   
+endfunction   
+function! NERDTree_IsValid()   
+    return 1   
+endfunction  
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 
 " 设置当文件被改动时自动载入
 set autoread
@@ -290,7 +390,6 @@ set completeopt=preview,menu
 "set clipboard+=unnamed 
 "自动保存
 set autowrite
-"set ruler                   " 打开状态栏标尺
 "set cursorline              " 突出显示当前行
 set magic                   " 设置魔术
 set guioptions-=T           " 隐藏工具栏
@@ -309,9 +408,6 @@ set nobackup
 set noswapfile
 "搜索忽略大小写
 set ignorecase
-
-
-
 
 set linespace=0
 " 增强模式中的命令行自动完成操作
@@ -334,23 +430,7 @@ set showmatch
 set matchtime=1
 " 光标移动到buffer的顶部和底部时保持3行距离
 set scrolloff=3
-" 为C程序提供自动缩进
-"自动补全
-"":inoremap ( ()<ESC>i
-"":inoremap ) <c-r>=ClosePair(')')<CR>
-":inoremap { {<CR>}<ESC>O
-":inoremap } <c-r>=ClosePair('}')<CR>
-"":inoremap [ []<ESC>i
-"":inoremap ] <c-r>=ClosePair(']')<CR>
-"":inoremap " ""<ESC>i
-"":inoremap ' ''<ESC>i
-""function! ClosePair(char)
-""	if getline('.')[col('.') - 1] == a:char
-""		return "\<Right>"
-""	else
-""		return a:char
-""	endif
-""endfunction
+
 filetype plugin indent on 
 "打开文件类型检测, 加了这句才可以用智能补全
 set completeopt=longest,menu
@@ -358,7 +438,7 @@ set completeopt=longest,menu
 " CTags的设定  
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let Tlist_Sort_Type = "name"    " 按照名称排序  
-let Tlist_Use_Right_Window = 1  " 在右侧显示窗口  
+let Tlist_Use_Right_Window = 0  " 在右侧显示窗口  
 let Tlist_Compart_Format = 1    " 压缩方式  
 let Tlist_Exist_OnlyWindow = 1  " 如果只有一个buffer，kill窗口也kill掉buffer  
 ""let Tlist_File_Fold_Auto_Close = 0  " 不要关闭其他文件的tags  
@@ -398,7 +478,6 @@ let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
 
-
 set iskeyword+=.
 set termencoding=utf-8
 set encoding=utf8
@@ -406,6 +485,51 @@ set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
 
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 
+"
+" vim-airline 插件    
+let g:airline_theme="base16_solarized" 
+"
+"这个是安装字体后 必须设置此项" 
+let g:airline_powerline_fonts = 1   
+
+"打开tabline功能,方便查看Buffer和切换,省去了minibufexpl插件
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+
+"设置切换Buffer快捷键"
+nmap <C-Tab> :bn<CR>
+nmap <C-S-Tab> :bp<CR>
+" 关闭状态显示空白符号计数
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#symbol = '!'
+" 设置consolas字体"前面已经设置过
+"set guifont=Consolas\ for\ Powerline\ FixedD:h11
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+  
+" unicode symbols
+"let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+"let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '⮀'
+let g:airline_symbols.maxlinenr = '⎇'
+let g:airline_symbols.branch = '»'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.spell = 'Ꞩ'
+let g:airline_symbols.notexists = ''
+let g:airline_symbols.whitespace = 'Ξ'
+
+" winmanager配置
+let g:winManagerWindowLayout='NERDTree|TagList'
+"let g:winManagerWindowLayout='NERDTree|TagList,BufExplorer'
+let g:winManagerWidth=30
+"let g:AutoOpenWinManager = 1
+nmap <F4> :WMToggle<CR>
+
+" 插件管理
 "set nocompatible               " be iMproved
 "filetype off                   " required!
 
@@ -450,6 +574,11 @@ Bundle 'The-NERD-Commenter'
 "django
 Bundle 'django_templates.vim'
 Bundle 'Django-Projects'
+" airline
+Bundle 'vim-airline/vim-airline'
+Bundle 'vim-airline/vim-airline-themes'
+" 窗口管理
+Bundle 'vim-scripts/winmanager'  
 
 "Bundle 'FredKSchott/CoVim'
 "Bundle 'djangojump'
@@ -464,9 +593,7 @@ filetype plugin indent on     " required!
 "
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.png,*.jpg,*.gif     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.pyc,*.png,*.jpg,*.gif  " Windows
-
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = '\v\.(exe|so|dll)$'
 let g:ctrlp_extensions = ['funky']
-
 let NERDTreeIgnore=['\.pyc']
