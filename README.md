@@ -28,7 +28,7 @@
 ####  修改为打开vim即可看到效果
 
 ### 如果vim状态栏出现乱码需要安装字体：
-[nerd字体安装]:https://github.com/ryanoasis/nerd-fonts
+[nerd字体安装](https://github.com/ryanoasis/nerd-fonts)
 
 ### 了解更多vim使用的小技巧：
 
