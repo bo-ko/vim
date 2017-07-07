@@ -2,6 +2,9 @@
 
 ![screenshot.png](screenshot.png)
 
+### 快速安装:(支持Ubuntu,debian.redhat,centos)
+- wget -qO- https://raw.github.com/bo-ko/vim/master/setup.sh | sh -x
+
 ### 安装：(以ubuntu为例)
 
 1. 安装vim `sudo apt-get install vim`
