@@ -34,3 +34,6 @@
 
 [tips.md](tips.md)
 
+### 参考资料
+[1.ma6174](https://github.com/ma6174/vim)
+[2.vim官网](http://www.vim.org/)
