@@ -35,7 +35,7 @@ set rtp+=$GOROOT/misc/vim
 syntax enable
 set background=dark
 colorscheme solarized
-
+set t_Co=256
 set cul "高亮光标所在行
 set cuc
 set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示  
