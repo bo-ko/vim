@@ -365,7 +365,7 @@ if has("autocmd")
           \ endif
 endif
 "当打开vim且没有文件时自动打开NERDTree
-"autocmd vimenter * if !argc() | NERDTree | endif
+autocmd vimenter * if !argc() | NERDTree | endif
 " 只剩 NERDTree时自动关闭
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 let g:NERDTree_title = "[NERDTree]"  
@@ -578,7 +578,7 @@ Bundle 'Django-Projects'
 Bundle 'vim-airline/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
 " 窗口管理
-Bundle 'vim-scripts/winmanager'  
+"Bundle 'vim-scripts/winmanager'  
 
 "Bundle 'FredKSchott/CoVim'
 "Bundle 'djangojump'
