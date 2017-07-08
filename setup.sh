@@ -31,3 +31,6 @@ vim boko-vim -c "BundleInstall" -c "q" -c "q"
 rm boko-vim
 
 echo "安装完成"
+
+sleep 1
+
