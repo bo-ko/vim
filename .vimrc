@@ -128,7 +128,7 @@ func SetComment()
 endfunc  
   
 func SetComment_shell()
-	call setline(1, "#!/bin/sh ") 
+	call setline(1, "#!/bin/bash ") 
     call append(line("."), "#================================================================")   
     call append(line(".")+1, "#   Copyright (C) ".strftime("%Y")." Sangfor Ltd. All rights reserved.")  
     call append(line(".")+2, "#   ")   
@@ -364,8 +364,8 @@ if has("autocmd")
           \   exe "normal g`\"" |
           \ endif
 endif
-"当打开vim且没有文件时自动打开NERDTree
-autocmd vimenter * if !argc() | NERDTree | endif
+" 当打开vim且没有文件时自动打开NERDTree
+" autocmd vimenter * if !argc() | NERDTree | endif
 " 只剩 NERDTree时自动关闭
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 let g:NERDTree_title = "[NERDTree]"  
@@ -377,7 +377,20 @@ function! NERDTree_IsValid()
 endfunction  
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
-
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
+let g:NERDTreeShowIgnoredStatus = 1
+ 
 " 设置当文件被改动时自动载入
 set autoread
 " quickfix模式
@@ -529,6 +542,15 @@ let g:winManagerWidth=30
 "let g:AutoOpenWinManager = 1
 nmap <F4> :WMToggle<CR>
 
+"ctrlp设置
+"
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.png,*.jpg,*.gif     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.pyc,*.png,*.jpg,*.gif  " Windows
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = '\v\.(exe|so|dll)$'
+let g:ctrlp_extensions = ['funky']
+let NERDTreeIgnore=['\.pyc']
+
 " 插件管理
 "set nocompatible               " be iMproved
 "filetype off                   " required!
@@ -571,6 +593,8 @@ Bundle 'ctrlp.vim'
 Bundle 'tacahiroy/ctrlp-funky'
 Bundle 'jsbeautify'
 Bundle 'The-NERD-Commenter'
+Bundle 'mhinz/vim-startify'
+Bundle 'ryanoasis/vim-devicons'
 "django
 Bundle 'django_templates.vim'
 Bundle 'Django-Projects'
@@ -578,7 +602,11 @@ Bundle 'Django-Projects'
 Bundle 'vim-airline/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
 " 窗口管理
-"Bundle 'vim-scripts/winmanager'  
+"Bundle 'vim-scripts/winmanager' 
+
+Bundle 'scrooloose/nerdtree'
+
+Bundle 'Xuyuanp/nerdtree-git-plugin' 
 
 "Bundle 'FredKSchott/CoVim'
 "Bundle 'djangojump'
@@ -589,11 +617,3 @@ let g:html_indent_style1 = "inc"
 
 filetype plugin indent on     " required!
 "
-"ctrlp设置
-"
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.png,*.jpg,*.gif     " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.pyc,*.png,*.jpg,*.gif  " Windows
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_custom_ignore = '\v\.(exe|so|dll)$'
-let g:ctrlp_extensions = ['funky']
-let NERDTreeIgnore=['\.pyc']
